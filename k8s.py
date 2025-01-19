@@ -2,9 +2,19 @@ from kubernetes import client, config
 
 # Load the Kubernetes configuration (e.g., from ~/.kube/config)
 config.load_kube_config()
+#api = client.CoreV1Api()
 
 # Create a Kubernetes API client
 api_instance = client.AppsV1Api()
+v1 = client.CoreV1Api()
+
+# List pods in a specific namespace
+namespace = "nginx"  # Replace with your desired namespace
+pods = v1.list_namespaced_pod(namespace)
+
+# Print the names of the pods
+for pod in pods.items:
+    print(pod.metadata.name)
 
 # Define a Deployment object
 deployment = client.V1Deployment(
@@ -38,16 +48,19 @@ try:
     )
     print("Deployment created successfully.")
 
-    # List pods in the default namespace
-    pods = api_instance.list_namespaced_pod(namespace="default")
-    print("List of Pods in the default namespace:")
-    for pod in pods.items:
-        print(f"Pod Name: {pod.metadata.name}")
 
-    # Delete the Deployment
-    api_instance.delete_namespaced_deployment(
-        name="sample-deployment", namespace="default"
-    )
+    # # List pods in the default namespace
+    # pods = api_instance.list_namespaced_pod(namespace="default")
+    # print("List of Pods in the default namespace:")
+    # for pod in pods.items:
+    #     print(f"Pod Name: {pod.metadata.name}")
+
+
+    # # Delete the Deployment
+    # api_instance.delete_namespaced_deployment(
+    #     name="sample-deployment", namespace="default"
+    # )
+
     print("Deployment deleted successfully.")
 except Exception as e:
     print(f"Error: {str(e)}")
