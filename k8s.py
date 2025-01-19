@@ -45,9 +45,9 @@ try:
         print(f"Pod Name: {pod.metadata.name}")
 
     # Delete the Deployment
- """    api_instance.delete_namespaced_deployment(
+    api_instance.delete_namespaced_deployment(
         name="sample-deployment", namespace="default"
     )
-    print("Deployment deleted successfully.") """
+    print("Deployment deleted successfully.")
 except Exception as e:
     print(f"Error: {str(e)}")
