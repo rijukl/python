@@ -28,3 +28,5 @@ while user_input != "exit":
     list_of_days = user_input.split(", ")
     for num_of_days_element in set(list_of_days):
         validate_and_execute()
+
+
