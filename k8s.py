@@ -6,11 +6,10 @@ config.load_kube_config()
 
 # Create a Kubernetes API client
 api_instance = client.AppsV1Api()
-v1 = client.CoreV1Api()
 
 # List pods in a specific namespace
 namespace = "nginx"  # Replace with your desired namespace
-pods = v1.list_namespaced_pod(namespace)
+pods = api_instance.list_namespaced_pod(namespace)
 
 # Print the names of the pods
 for pod in pods.items:
